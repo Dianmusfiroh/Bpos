@@ -8,30 +8,29 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'id_user',
-        'id_biodata',
-        'username',
-        'password',
-        'nama_lengkap',
+        'id',
+        'name',
         'no_hp',
-        'level',
-        'status',
-        'shift',
-        'date_created',
+        'email',
+        'email_verified_at',
+        'password',
+        'remember_token',
+        'created_at',
+        'update_at'
+        // User::first()->getAuthIdentifierName();
 
     ];
 
-    protected $table = 't_user';
+    protected $table = 'users';
     public $timestamps = false;
     /**
      * The attributes that should be hidden for serialization.

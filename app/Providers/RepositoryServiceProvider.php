@@ -35,6 +35,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\App\Repositories\BiodataRepository::class, \App\Repositories\BiodataRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\UserRepository::class, \App\Repositories\UserRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\StatusFeeRepository::class, \App\Repositories\StatusFeeRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\FeeRepository::class, \App\Repositories\FeeRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\MemberRepository::class, \App\Repositories\MemberRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\DataBankRepository::class, \App\Repositories\DataBankRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\AdminBankRepository::class, \App\Repositories\AdminBankRepositoryEloquent::class);
         //:end-bindings:
     }
 }

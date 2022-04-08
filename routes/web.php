@@ -8,8 +8,12 @@ use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\BiodatasController;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\BoothsController;
+use App\Http\Controllers\AdminBanksController;
+use App\Http\Controllers\FeesController;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,28 +26,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     Route::resource('dashboard',Home::class);
 
-//     return view('dashboard');
-
+Auth::routes();
+    Auth::routes(['verify' => true]);
 
 
-// });
-Route::resource('/',Home::class);
-
-// Route::group(['middleware' => ['auth', 'verified']], function () {
-    // Route::resource('bank', 'BanksController');
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::resource('fee',FeesController::class);
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('biodata',BiodatasController::class);
-    Route::resource('order',OrdersController::class);
+    Route::resource('adminBank',AdminBanksController::class);
+    Route::get('fee/invoice',[FeesController::class, 'invoice']);
+    Route::post('booth', 'BoothsController@detail')->name('detail');
     Route::resource('booth',BoothsController::class);
-    // Route::get('seller/{id}','SellersController@show')->name('show');
-    // Route::get('booth',[BoothsController::class,'show']);
+    Route::get('/downloadPdf/{id_bioadata}', [FeesController::class, 'downloadPdf'])->name('fee.downloadPdf');
+    Route::post('/booth/search',[BoothsController::class,'showBooth'])->name('booth.search');
+    Route::get('/booth/search', 'BoothsController@search')->name('booth.search');
+});
 
-    Route::resource('account',AccountsController::class);
 
-
-    // Route::get('/bank', [BanksController::class, 'index']);
-    // Route::get('/bank', 'BanksController@index')->name('home');
-
-// });

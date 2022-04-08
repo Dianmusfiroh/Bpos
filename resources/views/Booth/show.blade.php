@@ -1,202 +1,129 @@
 @extends('layout.sidebar')
+@include('layout.header')
+<div class="screen-overlay"></div>
 
- <div class="screen-overlay"></div>
+<main class="main-wrap">
 
-        <main class="main-wrap">
-            <header class="main-header navbar">
-                <div class="col-search">
-                    <form class="searchform">
-                        <div class="input-group">
-                            <input list="search_terms" type="text" class="form-control" placeholder="Search term" />
-                            <button class="btn btn-light bg" type="button"><i class="material-icons md-search"></i></button>
+    <section class="content-main">
+        <div class="content-header">
+            <a href="javascript:history.back()"><i class="material-icons md-arrow_back"></i> Go back </a>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header bg-brand-2" style="height: 150px"></div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xl col-lg flex-grow-0" style="flex-basis: 230px">
+                        <div class="img-thumbnail shadow w-100 bg-white position-relative text-center"
+                            style="height: 190px; width: 200px; margin-top: -120px">
+                            <img src="{{ asset('') }}"
+                                class="center-xy img-fluid" alt="Logo Brand" />
                         </div>
-                        <datalist id="search_terms">
-                            <option value="Products"></option>
-                            <option value="New orders"></option>
-                            <option value="Apple iphone"></option>
-                            <option value="Ahmed Hassan"></option>
-                        </datalist>
-                    </form>
-                </div>
-                <div class="col-nav">
-                    <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"><i class="material-icons md-apps"></i></button>
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <a class="nav-link btn-icon" href="#">
-                                <i class="material-icons md-notifications animation-shake"></i>
-                                <span class="badge rounded-pill">3</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i> </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="requestfullscreen nav-link btn-icon"><i class="material-icons md-cast"></i></a>
-                        </li>
-
-                        <li class="dropdown nav-item">
-                            <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount" aria-expanded="false"> <img class="img-xs rounded-circle" src="{{asset('assets/imgs/people/avatar-2.png')}}" alt="User" /></a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
-                                <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit Profile</a>
-                                <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account Settings</a>
-                                <a class="dropdown-item" href="#"><i class="material-icons md-account_balance_wallet"></i>Wallet</a>
-                                <a class="dropdown-item" href="#"><i class="material-icons md-receipt"></i>Billing</a>
-                                <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help center</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="#"><i class="material-icons md-exit_to_app"></i>Logout</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </header>
-        <section class="content-main">
-                <div class="content-header">
-                    <a href="javascript:history.back()"><i class="material-icons md-arrow_back"></i> Go back </a>
-                </div>
-                <div class="card mb-4">
-                    <div class="card-header bg-brand-2" style="height: 150px"></div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-xl col-lg flex-grow-0" style="flex-basis: 230px">
-                                <div class="img-thumbnail shadow w-100 bg-white position-relative text-center" style="height: 190px; width: 200px; margin-top: -120px">
-                                    <img src="{{ asset('assets/imgs/brands/vendor-2.png')}}" class="center-xy img-fluid" alt="Logo Brand" />
-                                </div>
-                            </div>
-                            <!--  col.// -->
-
-@foreach ($detail as $item)
-
-
-                            <div class="col-xl col-lg">
-                                {{-- <h3>{{ $item->nama_toko }}</h3> --}}
-                                {{-- <p>{{ $item->id_jenis_usaha}}</p> --}}
-                            </div>
-                            <!--  col.// -->
-                            <div class="col-xl-4 text-md-end">
-                                <select class="form-select w-auto d-inline-block">
-                                    <option>Actions</option>
-                                    <option>Disable shop</option>
-                                    <option>Analyze</option>
-                                    <option>Something</option>
-                                </select>
-                                <a href="#" class="btn btn-primary"> View live <i class="material-icons md-launch"></i> </a>
-                            </div>
-                            <!--  col.// -->
-                        </div>
-
-                        <!-- card-body.// -->
-                        <hr class="my-4" />
-                        <div class="row g-4">
-                            <div class="col-md-12 col-lg-4 col-xl-2">
-                                <article class="box">
-                                    <p class="mb-0 text-muted">Total sales:</p>
-                                    <h5 class="text-success">238</h5>
-                                    <p class="mb-0 text-muted">Revenue:</p>
-                                    <h5 class="text-success mb-0">$2380</h5>
-                                </article>
-                            </div>
-                            <!--  col.// -->
-                            <div class="col-sm-6 col-lg-4 col-xl-3">
-                                <h6>Contacts</h6>
-                                <p>
-                                    {{-- No. Telp: {{$item->no_hp_toko}} <br /> --}}
-                                    {{-- {{$item->email_toko}} <br /> --}}
-                                    {{-- Ig: {{$item->instagram}} --}}
-                                </p>
-                            </div>
-                            <!--  col.// -->
-                            <div class="col-sm-6 col-lg-4 col-xl-3">
-                                <h6>Address</h6>
-                                <p>
-                                 {{-- {{$item->alamat_toko}} --}}
-                                </p>
-                            </div>
-                            <!--  col.// -->
-                            <div class="col-sm-6 col-xl-4 text-xl-end">
-                                <map class="mapbox position-relative d-inline-block">
-                                    <img src="{{asset('assets/imgs/misc/map.jpg')}}" class="rounded2" height="120" alt="map" />
-                                    <span class="map-pin" style="top: 50px; left: 100px"></span>
-                                    <button class="btn btn-sm btn-brand position-absolute bottom-0 end-0 mb-15 mr-15 font-xs">Large</button>
-                                </map>
-                            </div>
-                            <!--  col.// -->
-                        </div>
-                        <!--  row.// -->
                     </div>
-                    <!--  card-body.// -->
-                </div>
-                <!--  card.// -->
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h3 class="card-title">Products by seller</h3>
-                        <div class="row">
-                            <div class="col-xl-2 col-lg-3 col-md-6">
-                                <div class="card card-product-grid">
-                                    <a href="#" class="img-wrap"> <img src="{{asset('assets/imgs/items/1.jpg')}}" alt="Product" /> </a>
-                                    <div class="info-wrap">
-                                        <a href="#" class="title">Product name</a>
-                                        <div class="price mt-1">$179.00</div>
-                                        <!-- price-wrap.// -->
-                                    </div>
-                                </div>
-                                <!-- card-product  end// -->
-                            </div>
-                            <!-- col.// -->
-                            <div class="col-xl-2 col-lg-3 col-md-6">
-                                <div class="card card-product-grid">
-                                    <a href="#" class="img-wrap"> <img src="{{asset('assets/imgs/items/2.jpg')}}" alt="Product" /> </a>
-                                    <div class="info-wrap">
-                                        <a href="#" class="title">Product name</a>
-                                        <div class="price mt-1">$179.00</div>
-                                        <!-- price-wrap.// -->
-                                    </div>
-                                </div>
-                                <!-- card-product  end// -->
-                            </div>
+                    <!--  col.// -->
 
+                    @foreach($detail as $item)
+
+
+                        <div class="col-xl col-lg">
+                            <h3>{{ $item->nama_toko }}<b>({{ $item->nama_lengkap }})</b></h3>
+                            <p>{{ $item->jenis_usaha }}</p>
+                        </div>
+                        <div class="col-xl-4 text-md-end">
+                            
+                            @if ($item->status_toko == '0')
+                            <div class="btn alert-danger col-xl-7">Nonaktif</div>
+                            @else ($item->status_toko == '1')
+                            <div class="btn alert-success col-xl-7">Aktif</div>
+                            @endif
+                        </div>
+                </div>
+                @endforeach
+
+                <!-- card-body.// -->
+                <hr class="my-4" />
+                <div class="row g-4">
+                    <div class="col-md-12 col-lg-4 col-xl-2">
+                        <article class="box">
+                            <p class="mb-0 text-muted">Fee Bulan:</p>
+                            <h5 class="text"> @if ($item->bulan == '01')Januari
+                                @elseif ($item->bulan =='02')Februari
+                                @elseif ($item->bulan == '03')Maret
+                                @elseif ($item->bulan == '04')April
+                                @elseif ($item->bulan == '05')Mei
+                                @elseif ($item->bulan == '06')Juni
+                                @elseif ($item->bulan == '07')Juli
+                                @elseif ($item->bulan == '08')Agustus
+                                @elseif ($item->bulan == '09')September
+                                @elseif ($item->bulan == '10')Oktober
+                                @elseif ($item->bulan == '11')November
+                                @elseif ($item->bulan == '12')Desember
+                                @endif -{{$item->tahun}}</h5>
+                            <p class="mb-0 text-muted">Total:</p>
+                            <h5 class="text mb-0"> @if ($item->status == 'belum')
+                                <div class="badge rounded-pill alert-danger"> @currency($item->jumlah_bayar)</div>
+                                @else ($item->status == 'lunas')
+                                <div class="badge rounded-pill alert-success">@currency ($item->jumlah_bayar)</div>
+                                @endif </h5>
+                        </article>
+                    </div>
+
+                    <div class="col-md-12 col-lg-4 col-xl-2">
+                        <article class="box">
+                            <p class="mb-0 text-muted">Transaksi:</p>
+                            @foreach ($transaksi as $item )
+                            <h5 class="text ">{{$item->jumlah}} </h5>
+                            <p class="mb-0 text-muted">Total:</p>
+                            <h5 class="text mb-0"> {{$item->total}} </h5>
                             @endforeach
 
-                        </div>
-                        <!-- row.// -->
+                        </article>
                     </div>
-                    <!--  card-body.// -->
-                </div>
-                <!--  card.// -->
-                <div class="pagination-area mt-30 mb-50">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-start">
-                            <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                            <li class="page-item"><a class="page-link" href="#">02</a></li>
-                            <li class="page-item"><a class="page-link" href="#">03</a></li>
-                            <li class="page-item"><a class="page-link dot" href="#">...</a></li>
-                            <li class="page-item"><a class="page-link" href="#">16</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#"><i class="material-icons md-chevron_right"></i></a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </section>
-           <footer class="main-footer font-xs">
-                <div class="row pb-30 pt-15">
-                    <div class="col-sm-6">
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script>
-                        ©, Nest - HTML Ecommerce Template .
+                    <div class="col-md-12 col-lg-4 col-xl-2">
+                        <article class="box " style="background-color: #ff5c5c">
+                            <p class="mb-12 " style="color: #fff;">Jumlah Produk:</p>
+                            <h1 class="text text-center " style="color: #fff;" >{{$produk->count()}}</h1>
+                        </article>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="text-sm-end">All rights reserved</div>
+                    <div class="col-md-12 col-lg-4 col-xl-2">
+                        <article class="box" style="background-color: #ff5c5c">
+                            <p class="mb-12" style="color: #fff;">Jumlah Pelanggan:</p>
+                            <h1 class="text text-center " style="color: #fff;">{{$pelanggan->count() }} </h1>
+                        </article>
                     </div>
+                    <!--  col.// -->
+                    @foreach($detail as $item)
+
+                    <div class="col-sm-6 col-lg-4 col-xl-3 text-md-left">
+                        <h6>Contacts</h6>
+                        <p>
+                            No. Telp: {{ $item->no_hp }} <br />
+                            {{ $item->email }} <br />
+                        </p>
+                        <h6>Address</h6>
+                        <p>
+                            {{ $item->alamat }}
+                        </p>
+                    </div>
+                    </div>
+                    @endforeach
+
                 </div>
-            </footer>
-        </main>
-       <script src="{{asset('assets/js/vendors/jquery-3.6.0.min.js')}}"></script>
-        <script src="{{asset('assets/js/vendors/bootstrap.bundle.min.js')}}"></script>
-        <script src="{{asset('assets/js/vendors/select2.min.js')}}"></script>
-        <script src="{{asset('assets/js/vendors/perfect-scrollbar.js')}}"></script>
-        <script src="{{asset('assets/js/vendors/jquery.fullscreen.min.js')}}"></script>
-        <!-- Main Script -->
-        <script src="{{asset('assets/js/main.js?v=1.0')}}" type="text/javascript"></script>
-    </body>
+                <!--  row.// -->
+            </div>
+            <!--  card-body.// -->
+
+        </div>
+
+    </section>
+
+</main>
+<script src="{{ asset('/assets/js/vendors/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('/assets/js/vendors/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('/assets/js/vendors/select2.min.js') }}"></script>
+<script src="{{ asset('/assets/js/vendors/perfect-scrollbar.js') }}"></script>
+<script src="{{ asset('/assets/js/vendors/jquery.fullscreen.min.js') }}"></script>
+<!-- Main Script -->
+<script src="{{ asset('\/assets/js/main.js?v=1.0') }}" type="text/javascript"></script>
+</body>
+
 </html>

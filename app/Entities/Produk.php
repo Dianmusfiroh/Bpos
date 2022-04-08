@@ -22,16 +22,14 @@ class Produk extends Model implements Transformable
      */
     protected $fillable = [
         'id_produk',
-        'id_user',
+        'id_fee',
+        'id_biodata',
         'nama_produk',
-        'jenis_produk',
-        'harga_jual',
-        'berat',
-        'gambar',
-        'deskripsi',
-        'is_active',
-        'status',
-        'created'
+        'harga',
+        'diskon',
+        'stok',
+        'image',
+        'created_at'
     ];
     protected $table = 't_produk';
     public $timestamps = false;
