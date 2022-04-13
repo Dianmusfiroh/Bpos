@@ -31,9 +31,9 @@
                         <div class="col-xl-4 text-md-end">
                             
                             @if ($item->status_toko == '0')
-                            <div class="btn alert-danger col-xl-7">Nonaktif</div>
+                            <div class="btn alert-danger col-xl-7" readonly>Nonaktif</div>
                             @else ($item->status_toko == '1')
-                            <div class="btn alert-success col-xl-7">Aktif</div>
+                            <div class="btn alert-success col-xl-7" readonly>Aktif</div>
                             @endif
                         </div>
                 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Biodata;
 use App\Entities\StatusFee;
 use App\Entities\Booth;
 use App\Entities\Produk;
@@ -81,7 +82,6 @@ class BoothsController extends Controller
         // WHERE ju.id_jenis_usaha = b.id_jenis_usaha ORDER BY b.id_biodata'))->get()->paginate(5);
 
         $data = DB::table('t_biodata')
-                ->where('nama_toko', 'like',$searchTerm )
                 ->join('t_jenis_usaha','t_biodata.id_jenis_usaha','=','t_jenis_usaha.id_jenis_usaha')
                 ->select('t_biodata.id_biodata','t_biodata.status_toko','t_biodata.nama_toko','t_jenis_usaha.jenis_usaha','t_biodata.alamat','t_biodata.email',
                 't_biodata.no_hp','t_biodata.image','t_biodata.status_toko')->get();
@@ -92,7 +92,13 @@ class BoothsController extends Controller
         FROM `t_status_bayar_fee` s, t_biodata b WHERE b.id_biodata = s.id_biodata  '));
         return view('booth.index', compact('statusFee','booths','model','data'));
     }
-
+public function updateStatus(Request $request)
+    {
+        $biodata = Booth::find($request->id_biodata);
+        $biodata->id_biodata = $request->id_biodata;
+        $biodata->status_toko = $request->status_toko;
+        $biodata->save();
+    }
 
 
     /**
@@ -148,6 +154,7 @@ class BoothsController extends Controller
 
         $produk = Produk::where('id_biodata', $id_biodata)->select('id_produk')->get();
         $pelanggan = Transaksi::where('id_biodata',$id_biodata)->select('id_transaksi')->get();
+        //$update = DB::select(DB::raw("UPDATE `t_biodata`  WHERE `t_biodata`.`id_biodata` = $id_biodata"));
         $transaksi = DB::select(DB::raw("SELECT COUNT(id_biodata) jumlah,SUM(total_bayar) total FROM t_transaksi  WHERE id_biodata = $id_biodata GROUP BY id_biodata"));
         // dump($transaksi);
         $detail = DB::select(DB::raw("SELECT b.*,ju.jenis_usaha,u.nama_lengkap,MAX(s.bulan) AS bulan,MAX(s.tahun) AS tahun,s.jumlah_bayar,s.status FROM `t_biodata` b, t_jenis_usaha ju, t_user u,t_status_bayar_fee s WHERE b.id_biodata = u.id_biodata AND b.id_jenis_usaha = ju.id_jenis_usaha AND u.level = 'owner' AND b.id_biodata = s.id_biodata  AND b.id_biodata = $id_biodata order BY s.bulan DESC, s.tahun DESC"));
@@ -193,37 +200,41 @@ class BoothsController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(BoothUpdateRequest $request, $id)
+    public function update(BoothUpdateRequest $request, $id_biodata)
     {
-        try {
+        $biodata = Biodata::find($request->status_toko);
+        $biodata->status_toko = $request->status_toko;
+        $biodata->save();
+        return response()->json(['success'=>'Status change successfully.']);
+        // try {
 
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
+        //     $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $booth = $this->repository->update($request->all(), $id);
+        //     $booth = $this->repository->update($request->all(), $id);
 
-            $response = [
-                'message' => 'Booth updated.',
-                'data'    => $booth->toArray(),
-            ];
+        //     $response = [
+        //         'message' => 'Booth updated.',
+        //         'data'    => $booth->toArray(),
+        //     ];
 
-            if ($request->wantsJson()) {
+        //     if ($request->wantsJson()) {
 
-                return response()->json($response);
-            }
+        //         return response()->json($response);
+        //     }
 
-            return redirect()->back()->with('message', $response['message']);
-        } catch (ValidatorException $e) {
+        //     return redirect()->back()->with('message', $response['message']);
+        // } catch (ValidatorException $e) {
 
-            if ($request->wantsJson()) {
+        //     if ($request->wantsJson()) {
 
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
+        //         return response()->json([
+        //             'error'   => true,
+        //             'message' => $e->getMessageBag()
+        //         ]);
+        //     }
 
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
-        }
+        //     return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+        // }
     }
 
 

@@ -1089,10 +1089,10 @@ textarea.form-control {
 }
 
 .form-check-input:checked {
-    /* background-color: #3BB77E;
-  border-color: #3BB77E; */
-    background-color: #ff4f4f;
-    border-color: #ff4f4f;
+    background-color: #3BB77E;
+    border-color: #3BB77E;
+    /* background-color: #ff4f4f;
+    border-color: #ff4f4f; */
 }
 
 

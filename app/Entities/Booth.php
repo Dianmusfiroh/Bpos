@@ -33,6 +33,7 @@ class Booth extends Model implements Transformable
 
 
     ];
+    protected $primaryKey = 'id_biodata';
 
     protected $table='t_biodata';
     public $timestamps = false;

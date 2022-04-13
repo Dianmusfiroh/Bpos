@@ -28,7 +28,7 @@
                                 <th>Alamat</th>
                                 <th>Email</th>
                                 <th>No Hp</th>
-                                <th class="text-end">Action</th>
+                                <th >Action</th>
                             </tr>
                         </thead>
                         <tbody >
@@ -51,15 +51,17 @@
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->no_hp }}</td>
                                     <td class= "text-end">
-                                        <a href="{{ route($model . '.show', $item->id_biodata) }}" class="material-icons md-remove_red_eye "></a>
-                                        <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$item->id_biodata}})"data-target="#DeleteModal" class="material-icons md-delete_outline"></a>
-                                        @if ($item->status_toko == 1)
-                                        <a href="" class="btn btn-primary"> Aktif </a>
-                                            
-                                        @else($item->status_toko == 0)
-                                        <a href="" class="btn btn-danger"> Nonaktif </a>
-                                            
-                                        @endif
+                                        <div class="row align-items-start">
+                                            <div class="col ">
+                                            <a href="{{ route($model . '.show', $item->id_biodata) }}" class="material-icons md-remove_red_eye "></a>
+                                            </div>
+                                            <div class="col">
+                                            <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$item->id_biodata}})"data-target="#DeleteModal" class="material-icons md-delete_outline"></a>
+                                            </div>
+                                            <div class="col">
+                                            <div class="  form-check form-switch">
+                                                <input data-ids="{{$item->id_biodata}}" class="form-check-input" type="checkbox" data-onstyle="success" {{ $item->status_toko ? 'checked' : '' }}>
+                                            </div> </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -103,9 +105,30 @@
 {{--  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>  --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
 @section('plugins.Datatables', true)
 @include('sweetalert::alert')
 @include('layouts.script.delete')
+<script>
+    $(function() {
+      $('.form-check-input').change(function() {
+          var status_toko = $(this).prop('checked') == true ? 1 : 0;
+          var id_biodata = $(this).data('ids');
+
+           console.log(status_toko)
+          $.ajax({
+              type: "GET",
+              dataType: "json",
+              url: '{{ route('updateStatus') }}',
+              data: {'status_toko': status_toko, 'id_biodata': id_biodata},
+              success: function(data){
+                console.log(url)
+              }
+          });
+      })
+    })
+  </script>
 <script>
     $('body').on('click', '#btnDetail', function (event) {
         event.preventDefault();
@@ -127,13 +150,14 @@
     });
 
 </script>
+
 <script>
     $("#myTable").DataTable({
                     "autoWidth": false,
                     "responsive": true
                 });
 </script>
-
+{{--  @livewireScripts  --}}
 </body>
 
 </html>

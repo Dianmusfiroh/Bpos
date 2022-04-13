@@ -41,7 +41,13 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('booth',BoothsController::class);
     Route::get('/downloadPdf/{id_bioadata}', [FeesController::class, 'downloadPdf'])->name('fee.downloadPdf');
     Route::post('/booth/search',[BoothsController::class,'showBooth'])->name('booth.search');
-    Route::get('/booth/search', 'BoothsController@search')->name('booth.search');
+    // Route::get('/booth/updateStatus',[BoothsController::class,'update'])->name('updateStatus');
+    Route::get('updateStatus',[BoothsController::class,'updateStatus'])->name('updateStatus');
+    // Route::get('/booth/update',[FeesController::class, 'updateStatus']);
+    // Route::get('/booth/search', 'BoothsController@search')->name('booth.search');
+    // Route::get('/booth/update', [BoothsController::class, 'updateStatus'])->name('status');
+    // Route::get('booth/update', 'BoothsController@updateStatus')->name('updateStatus');
+
 });
 
 

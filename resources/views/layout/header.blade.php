@@ -10,8 +10,9 @@
         <meta property="og:type" content="" />
         <meta property="og:url" content="" />
         <meta property="og:image" content="" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Favicon -->
-
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="DataTables/datatables.css"/>
         {{--  <link rel="stylesheet" type="text/css" href="DataTables/dataTables.bootstrap4.min.css"/>  --}}
         <!-- <link rel="shortcut icon" type="image/x-icon" href="resource/assets/imgs/theme/favicon.svg" /> -->
@@ -30,7 +31,7 @@
         <script src = "http://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer ></script>
         <script type="text/javascript" src="~/Scripts/jquery.js"></script>
         <script type="text/javascript" src="~/Scripts/data-table/jquery.dataTables.js"></script>  --}}
-
+        {{--  @livewireStyles  --}}
     </head>
     <header class="main-header navbar">
         <div class="col-search">
@@ -78,3 +79,11 @@
     <!-- Main Script -->
     <script src="assets/js/main.js?v=1.0" type="text/javascript"></script>
     <script src="assets/js/custom-chart.js" type="text/javascript"></script>
+
+    <script>
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>

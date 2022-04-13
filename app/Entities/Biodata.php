@@ -32,9 +32,9 @@ class Biodata extends Model implements Transformable
 
 
     ];
+    public $timestamps = false;
 
     protected $table = 't_biodata';
-    public $timestamps = false;
     public function jenisUsaha()
     {
         return $this->belongsTo(JenisUsaha::class);
